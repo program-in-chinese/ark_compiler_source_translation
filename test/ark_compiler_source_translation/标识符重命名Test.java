@@ -15,32 +15,32 @@ class 标识符重命名Test {
     // 单个标识符
     assertEquals("class 编译器类 {",
         功用.重命名("class Compiler {",
-            "Compiler", "编译器类"));
+            "Compiler", "编译器类").结果);
 
     // 多个同名标识符
     assertEquals("  explicit 编译器类(const std::string &名称) : 名称(名称) {}",
         功用.重命名("  explicit 编译器类(const std::string &name) : name(name) {}",
-            "name", "名称"));
+            "name", "名称").结果);
 
     // 大小写敏感
     assertEquals("  const int 运行(const 选项类 &MplOptions, const std::string &普通选项) const;",
         功用.重命名("  const int 运行(const 选项类 &MplOptions, const std::string &options) const;",
-            "options", "普通选项"));
+            "options", "普通选项").结果);
 
     // 无视//打头的行
     assertEquals("// options",
         功用.重命名("// options",
-            "options", "普通选项"));
+            "options", "普通选项").结果);
 
     // 无视//之后部分
     assertEquals("普通选项// options",
         功用.重命名("options// options",
-            "options", "普通选项"));
+            "options", "普通选项").结果);
 
     // 无视 /* */之间部分
     assertEquals("/* options */",
         功用.重命名("/* options */",
-            "options", "普通选项"));
+            "options", "普通选项").结果);
   }
 
   @Test

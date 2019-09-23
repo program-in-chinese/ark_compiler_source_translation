@@ -1,12 +1,15 @@
 package ark_compiler_source_translation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import com.codeinchinese.源码.翻译.功用;
+import com.codeinchinese.源码.翻译.重命名行;
 
 class 标识符重命名Test {
 
@@ -41,6 +44,20 @@ class 标识符重命名Test {
     assertEquals("/* options */",
         功用.重命名("/* options */",
             "options", "普通选项").结果);
+
+    // 无视 /* 之后
+    重命名行 翻译 = 功用.重命名("/* options",
+        "options", "普通选项");
+    assertEquals("/* options", 翻译.结果);
+    assertTrue(翻译.注释开始);
+    assertFalse(翻译.注释结束);
+
+    // TODO: 无视 */ 之前
+    // 翻译 = 功用.重命名("* options */",
+    //    "options", "普通选项");
+    //assertEquals("* options */", 翻译.结果);
+    //assertFalse(翻译.注释开始);
+    //assertTrue(翻译.注释结束);
   }
 
   @Test

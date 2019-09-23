@@ -36,6 +36,11 @@ class 标识符重命名Test {
     assertEquals("普通选项// options",
         功用.重命名("options// options",
             "options", "普通选项"));
+
+    // 无视 /* */之间部分
+    assertEquals("/* options */",
+        功用.重命名("/* options */",
+            "options", "普通选项"));
   }
 
   @Test
@@ -50,6 +55,20 @@ class 标识符重命名Test {
             "\n",
             "  virtual ~Compiler() {}"
             ),
+            "Compiler", "编译器类"));
+
+    // 忽略单行注释
+    assertEquals(
+        Arrays.asList("// Compiler"),
+        功用.块重命名(Arrays.asList("// Compiler"),
+            "Compiler", "编译器类"));
+
+    // 跳过单行注释
+    assertEquals(
+        Arrays.asList("// Compiler",
+            "class 编译器类 {\n", " public:\n"),
+        功用.块重命名(Arrays.asList("// Compiler",
+            "class Compiler {\n", " public:\n"),
             "Compiler", "编译器类"));
   }
 

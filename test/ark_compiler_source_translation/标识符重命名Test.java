@@ -52,12 +52,15 @@ class 标识符重命名Test {
     assertTrue(翻译.注释开始);
     assertFalse(翻译.注释结束);
 
-    // TODO: 无视 */ 之前
-    // 翻译 = 功用.重命名("* options */",
-    //    "options", "普通选项");
-    //assertEquals("* options */", 翻译.结果);
-    //assertFalse(翻译.注释开始);
-    //assertTrue(翻译.注释结束);
+    // 无视 */ 之前
+    翻译 = 功用.重命名("* options */",
+        "options", "普通选项");
+    assertEquals("* options */", 翻译.结果);
+    assertFalse(翻译.注释开始);
+    assertTrue(翻译.注释结束);
+
+    // TODO: 暂不处理这样的注释:
+    // 开头注释 */ 代码部分 /* 末尾注释
   }
 
   @Test
@@ -85,6 +88,18 @@ class 标识符重命名Test {
         Arrays.asList("// Compiler",
             "class 编译器类 {\n", " public:\n"),
         功用.块重命名(Arrays.asList("// Compiler",
+            "class Compiler {\n", " public:\n"),
+            "Compiler", "编译器类"));
+
+    // 跳过多行注释
+    assertEquals(
+        Arrays.asList("/* Compiler",
+            "* Compiler",
+            "* Compiler */",
+            "class 编译器类 {\n", " public:\n"),
+        功用.块重命名(Arrays.asList("/* Compiler",
+            "* Compiler",
+            "* Compiler */",
             "class Compiler {\n", " public:\n"),
             "Compiler", "编译器类"));
   }

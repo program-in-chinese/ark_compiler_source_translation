@@ -1,9 +1,11 @@
-package com.codeinchinese.源码.翻译;
+package com.codeinchinese.源码.功用;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class 功用 {
+import com.codeinchinese.源码.翻译.重命名行;
+
+public class 代码处理功能 {
 
   private static final String 单行注释 = "//";
   private static final String 块注释开头 = "/*";

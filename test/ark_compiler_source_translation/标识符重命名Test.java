@@ -20,6 +20,11 @@ class 标识符重命名Test {
         功用.重命名("class Compiler {",
             "Compiler", "编译器类").结果);
 
+    // 包含标识符
+    assertEquals("class Jbc2MplCompiler : public 编译器类 {",
+        功用.重命名("class Jbc2MplCompiler : public Compiler {",
+            "Compiler", "编译器类").结果);
+    
     // 多个同名标识符
     assertEquals("  explicit 编译器类(const std::string &名称) : 名称(名称) {}",
         功用.重命名("  explicit 编译器类(const std::string &name) : name(name) {}",

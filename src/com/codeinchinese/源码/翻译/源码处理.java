@@ -20,6 +20,11 @@ public class 源码处理 {
     字典.put("PrintErrorMessage", "报错");
     字典.put("ret", "返回");
     字典.put("mplOptions", "选项");
+    字典.put("Error Exit!", "因错误退出!");
+    字典.put("kLncErr", "错误日志");
+    字典.put("ERR", "错误");
+    字典.put("kErrorNoError", "无误");
+    字典.put("MplOptions", "选项类");
     //字典.put("Compiler", "编译器类");
   }
   

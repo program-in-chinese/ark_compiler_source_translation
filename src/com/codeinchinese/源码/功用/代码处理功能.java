@@ -10,6 +10,7 @@ public class 代码处理功能 {
   private static final String 单行注释 = "//";
   private static final String 块注释开头 = "/*";
   private static final String 块注释结尾 = "*/";
+  private static final String 字符串标志 = "\"";
 
   public static 重命名行 重命名(String 代码行, String 英文, String 中文) {
     String 注释 = "";
@@ -59,6 +60,36 @@ public class 代码处理功能 {
         break;
       } else {
         翻译后代码 += 非注释代码.substring(当前位置, 词位置);
+
+        // 如果词在引号中间, 则忽略
+        int 前引号位置 = 非注释代码.indexOf(字符串标志);
+        if (前引号位置 > -1) {
+          // System.out.println("前引号位置: " + 前引号位置);
+          if (前引号位置 < 词位置 - 1) {
+            // 权宜: 如果中间还有引号, 则仍翻译
+            int 后引号位置 = 非注释代码.indexOf(字符串标志, 前引号位置 + 1);
+            // System.out.println("检查后引号位置: " + 后引号位置);
+            if (后引号位置 == -1) {
+              翻译后代码 += 英文;
+              当前位置 = 词位置 + 英文.length();
+              continue;
+            } else if (后引号位置 > 词位置){
+              翻译后代码 += 英文;
+              当前位置 = 词位置 + 英文.length();
+              continue;
+            }
+          } else if (前引号位置 == 词位置 - 1) {
+            int 后引号位置 = 非注释代码.indexOf(字符串标志, 词位置 + 英文.length() + 1);
+            // System.out.println("后引号位置: " + 后引号位置);
+            // 如果紧接着, 翻译
+            if (后引号位置 > 0) {
+              翻译后代码 += 英文;
+              当前位置 = 词位置 + 英文.length();
+              continue;
+            }
+          }
+        }
+          
         int 词结束位置 = 词位置 + 英文.length();
         if (词位置 == 0) {
           if (非注释代码.length() > 词结束位置) {

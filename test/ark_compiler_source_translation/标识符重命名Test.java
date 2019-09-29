@@ -32,6 +32,11 @@ class 标识符重命名Test {
     assertEquals("#include \"default/O0_options_jbc2mpl.def\"",
         代码处理功能.重命名("#include \"default/O0_options_jbc2mpl.def\"",
             "options", "选项").结果);
+    
+    assertEquals("   错误(kLncErr, \"syntax error at file %s line %d\", filename, lineno);",
+        代码处理功能.重命名("   ERR(kLncErr, \"syntax error at file %s line %d\", filename, lineno);",
+            "ERR", "错误").结果);
+    
     // 多个同名标识符
     assertEquals("  explicit 编译器类(const std::string &名称) : 名称(名称) {}",
         代码处理功能.重命名("  explicit 编译器类(const std::string &name) : name(name) {}",
@@ -73,9 +78,9 @@ class 标识符重命名Test {
 
     // TODO: 暂不处理这样的注释:
     // 开头注释 */ 代码部分 /* 末尾注释
-    
-    // TODO: 不翻译字符串常量内容
-    // "Error while Exe, cmd: " Exe -> 运行
+    assertEquals("    CHECK_FATAL(false, \"Candidates not found for function %s\", callee->求名称().c_str());",
+        代码处理功能.重命名("    CHECK_FATAL(false, \"Candidates not found for function %s\", callee->GetName().c_str());",
+            "GetName", "求名称").结果);
   }
 
   @Test

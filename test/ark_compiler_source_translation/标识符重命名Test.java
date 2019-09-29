@@ -25,6 +25,13 @@ class 标识符重命名Test {
         代码处理功能.重命名("class Jbc2MplCompiler : public Compiler {",
             "Compiler", "编译器类").结果);
     
+    assertEquals("IsUnaryNode",
+        代码处理功能.重命名("IsUnaryNode",
+            "UnaryNode", "一元节点类").结果);
+    
+    assertEquals("#include \"default/O0_options_jbc2mpl.def\"",
+        代码处理功能.重命名("#include \"default/O0_options_jbc2mpl.def\"",
+            "options", "选项").结果);
     // 多个同名标识符
     assertEquals("  explicit 编译器类(const std::string &名称) : 名称(名称) {}",
         代码处理功能.重命名("  explicit 编译器类(const std::string &name) : name(name) {}",
@@ -66,6 +73,9 @@ class 标识符重命名Test {
 
     // TODO: 暂不处理这样的注释:
     // 开头注释 */ 代码部分 /* 末尾注释
+    
+    // TODO: 不翻译字符串常量内容
+    // "Error while Exe, cmd: " Exe -> 运行
   }
 
   @Test

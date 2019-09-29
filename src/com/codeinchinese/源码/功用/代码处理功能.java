@@ -51,7 +51,7 @@ public class 代码处理功能 {
   public static String 标识符重命名(String 非注释代码, String 英文, String 中文) {
     int 当前位置 = 0;
     String 翻译后代码 = "";
-    String 非标识符字符 = "[^0-9a-zA-Z]";
+    String 非标识符字符 = "[^0-9a-zA-Z_]";
     do {
       int 词位置 = 非注释代码.indexOf(英文, 当前位置);
       if (词位置 == -1) {

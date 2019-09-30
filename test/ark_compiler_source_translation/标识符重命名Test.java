@@ -37,6 +37,20 @@ class 标识符重命名Test {
         代码处理功能.重命名("   ERR(kLncErr, \"syntax error at file %s line %d\", filename, lineno);",
             "ERR", "错误").结果);
     
+    assertEquals("        GlobalTables::GetGsymTable().GetSymbolFromStidx(m.first.Idx())->求名称());",
+        代码处理功能.重命名("        GlobalTables::GetGsymTable().GetSymbolFromStidx(m.first.Idx())->GetName());",
+            "GetName", "求名称").结果);
+    
+    // TODO: 需改进字符串/注释分析
+    //assertEquals("  cfgFile << \" # /*\" << func->求名称().c_str() << \" (red line is exception handler)*/\\n\";",
+    //    代码处理功能.重命名("  cfgFile << \" # /*\" << func->GetName().c_str() << \" (red line is exception handler)*/\\n\";",
+    //        "GetName", "求名称").结果);
+    
+    // TODO: 有些标识符即使在注释/字符串中也应翻译(当前默认不翻译)
+    //assertEquals("      ASSERT(callstmt != nullptr, \"callstmt is null in 内部表示解析器类::ParseStmtCall\");",
+    //    代码处理功能.重命名("      ASSERT(callstmt != nullptr, \"callstmt is null in MIRParser::ParseStmtCall\");",
+    //        "MIRParser", "内部表示解析器类").结果);
+    
     // 多个同名标识符
     assertEquals("  explicit 编译器类(const std::string &名称) : 名称(名称) {}",
         代码处理功能.重命名("  explicit 编译器类(const std::string &name) : name(name) {}",

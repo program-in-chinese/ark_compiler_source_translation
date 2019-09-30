@@ -97,7 +97,7 @@ public class 源码处理 {
     字典.put("ConststrNode", "常量字符串节点类");
     字典.put("Conststr16Node", "常量16字符串节点类");
     字典.put("DoloopNode", "循环节点类");
-    字典.put("IassignFPoffNode", "帧址带偏移间接赋值节点类 ");
+    字典.put("IassignFPoffNode", "帧址带偏移间接赋值节点类");
     字典.put("IreadFPoffNode", "帧址带偏移间接读取节点类");
     字典.put("ParseInput", "解析输入");
     字典.put("ParseMIR", "解析内部表示");
